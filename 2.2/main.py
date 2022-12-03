@@ -14,14 +14,14 @@ def compute_score(them, me):
         winScore = 6
     return winScore + me + 1
 
-PLAYER_INPUT_MAP = {"X": ROCK, "Y": PAPER, "Z": SCISSORS}
+PLAYER_DEVIATION_MAP = {"X": -1, "Y": 0, "Z": 1}
 ELF_INPUT_MAP = {"A": ROCK, "B": PAPER, "C": SCISSORS}
 
 score = 0
 for line in lines:
     line = line[:-1]
     them = ELF_INPUT_MAP[line[0]]
-    me = PLAYER_INPUT_MAP[line[-1]]
-    score += compute_score(them, me)
+    deviation = PLAYER_DEVIATION_MAP[line[-1]]
+    score += compute_score(them, (them+deviation)%3)
 
 print(score)
